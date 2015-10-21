@@ -3,10 +3,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Protractor for AngularJS: writing end-to-end tests has never been so fun</title>
+		<title>Protractor for AngularJS</title>
 
 		<meta name="description" content="A step-by-step presentaion on Protractor End-to-End Testing for AngularJS">
-		<meta name="author" content="Ramon Victor | @ramonvictor">
+		
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -37,10 +37,8 @@
 
 				<section>
 					<h1 style="margin: 50px 0 .3em">Protractor for AngularJS</h1>
-					<h3 style="font-size:1.2em;margin-bottom:2em">Writing end-to-end tests has never been so fun</h3>
-					<p>
-						<a href="https://github.com/ramonvictor">@ramonvictor</a>
-					</p>
+					
+					
 				</section>
 
 				<section>
@@ -48,24 +46,8 @@
 					<div id="table-of-contents"></div>
 				</section>
 
-				<section>
-					<h2 class="slide-header">Why is testing so important?</h2>
-					<blockquote style="line-height:1.2em">
-						Testing is about gaining confidence that your code does what you think it should do
-					</blockquote>
-					<p><a href="https://github.com/juliemr">@juliemr</a></p>
-				</section>
-
-				<section>
-					<h2 class="slide-header">Whats the idea behind E2E testing?</h2>
-					<ul>
-						<li>How would the users see my application?</li>
-						<li>Is my backend communicating with my frontend?</li>
-						<li>Can I release this code?</li>
-						<li>It does <strong>NOT</strong> replace Unit Testing!</li>
-					</ul>
-				</section>
-
+				
+			
 				<section>
 					<h2 class="slide-header">The dark side of E2E testing</h2>
 					<ul>
@@ -147,8 +129,8 @@
      username.clear();
      expect(name.getText()).toEqual('');
 
-     username.sendKeys('Jane Doe');
-     expect(name.getText()).toEqual('Jane Doe');
+     username.sendKeys('Cristian Bancu');
+     expect(name.getText()).toEqual('Cristian Bancu');
    });
 });</code></pre>
 				</section>
@@ -158,7 +140,7 @@
 					<ul>
 						<li><code>browser</code>: <code>browser.get()</code></li>
 						<li><code>element</code> and <code>by</code>: <code>element(by.model('yourName'))</code></li>
-						<li><code>protractor</code>: <code>protractor.Key</code></li>
+						<li><code>protractor</code>: <code>protractor.Key.CTRL</code></li>
 					</ul>
 				</section>
 
@@ -169,19 +151,19 @@ describe('angularjs homepage', function() {
   it('should greet the named user', function() {
     browser.get('http://www.angularjs.org');
 
-    element(by.model('yourName')).sendKeys('Julie');
+    element(by.model('yourName')).sendKeys('Cristi');
 
     var greeting = element(by.binding('yourName'));
 
-    expect(greeting.getText()).toEqual('Hello Julie!');
+    expect(greeting.getText()).toEqual('Hello Cristi!');
   });
 });
 </code></pre>
 				</section>
 
 				<section>
-					<h2 class="slide-header">Let's run it?</h2>
-					<p>First things first, open the terminal and start the webdriver server:
+					<h2 class="slide-header">Run it</h2>
+					<p>open the terminal and start the webdriver server:
 					</p>
 					<pre style="margin-bottom:40px"><code>webdriver-manager start</code></pre>
 					<p>After that, you can run Protractor in another terminal by typing:</p>
@@ -199,6 +181,11 @@ describe('angularjs homepage', function() {
 					<p>Collection of elements</p>
 					<pre><code>// clicks the 3rd element
 element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
+// HINT
+
+// when selecting by css, some shorcuts are available 
+// the above is equivalent to 
+$$('[ng-click="openPage()"]').get(2).click();
 				</section>
 
 				<section>
