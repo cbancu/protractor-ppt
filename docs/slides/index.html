@@ -197,13 +197,43 @@ $$('[ng-click="openPage()"]').get(2).click();
 
 				</section>
 <section>
-	<h2><code>ElementFinder</code></h2>
+	
+	<h2 class="slide-header">ElementFinder</h2>
 <p><code>element(locator)</code> returns an <code>ElementFinder</code>ElementFinder 
 </p>
 
+<pre style="margin-bottom:40px">
+<code>
+var el = element(locator);
+
+// Click on the element
+el.click();
+
+// Send keys to the element (usually an input)
+el.sendKeys('my text');
+
+// Clear the text in an element (usually an input)
+el.clear();
+
+// Get the value of an attribute, for example, get the value of an input
+el.getAttribute('value');	
+</code></pre>
+
 <p><code>element.all(locator)</code> returns  an array of <code>ElementFinder</code>ElementFinder 
 </p>
-	
+
+<pre style="margin-bottom:40px"><code>
+// Number of elements.
+element.all(locator).count();
+
+// Get by index (starting at 0).
+element.all(locator).get(index);
+
+// First and last.
+element.all(locator).first();
+element.all(locator).last();
+</code></pre>	
+
 </section>
 
 
