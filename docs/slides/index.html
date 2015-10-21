@@ -362,14 +362,28 @@ this.getGridColumnsNumber = function() {
 				<section>
 					<h2>Control Flow</h2>
 					<p>WebDriverJS maintains a queue of pending promises, called the <a href="https://github.com/angular/protractor/blob/master/docs/control-flow.md">control flow</a>, to keep execution organized.</p>
-<pre><code>it('should find an element by text input model', function() {
-  browser.get('#/home'); // (1) method browser.get
+<pre><code>
+it('should delete the newly created template', function () {
+        var gridId = searchTemplatesPage.getGridId();
 
-  // (2) method by.binding
-  var login = element(by.binding('login'));
-  // (3) method getText
-  expect(login.getText()).toEqual('User');
-});</code></pre>
+        expect(recentTemplatesPage.getTemplatesCountDisplayed()).toEqual(1);
+
+        // select 1st the row 
+        gridUtils.selectRow(gridId, 0);
+
+        // press delete all on page 
+        recentTemplatesPage.deleteAllBtn.click();
+
+        // press delete on modal (for template confirmation)
+        recentTemplatesPage.deleteTemplateBtn.click();
+
+        // let some time to refresh the child page (and grid to re-populate)
+        browser.driver.sleep(5000);
+
+        // after delete, no template shoud be found in grid 
+        expect(recentTemplatesPage.getTemplatesCountDisplayed()).toEqual(0);
+    });
+</code></pre>
 					<p style="font-size: .6em;text-align: left;line-height: 140%;">In the example above, the control flow would execute the queue following the sequence we see in the comments. Basically method <code>by.binding</code>  would only run once <code>browser.get</code> promise is resolved, and so on.</p>
 				</section>
 
