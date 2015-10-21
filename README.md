@@ -8,7 +8,7 @@ A step-by-step guide presentation on Protractor end-to-end testing.
 
 <td>
 <h3>Slides available online: <br>
-<a href="https://github.com/cbancu/protractor-ppt/slides/">Protractor for AngularJS: writing end-to-end tests has never been so fun</a>
+<a href="https://github.com/cbancu/protractor-ppt/docs/slides/">Protractor for AngularJS: writing end-to-end tests has never been so fun</a>
 </h3>
 </td>
 </tr>
