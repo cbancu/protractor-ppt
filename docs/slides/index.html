@@ -476,20 +476,60 @@ module.exports = new SearchTemplatesPage();
 				<section>
 					<h2 class="slide-header">Node.JS exports and require</h2>
 					<strong>Your Page Object file</strong>
-					<pre><code>var AngularHomepage = function() {
-  this.nameInput = element(by.model('yourName'));
-  this.greeting = element(by.binding('yourName'));
-  // ...
-};
-module.exports = AngularHomepage;
+					<pre><code>
+var uuid = require('node-uuid');
+var colUtils = require('../test-utils/element-collections-utils');
+
+var MailSettingsPage = function() {
+
+    this.name = $('#inputName');
+    this.categoryDropDown = $('#selectCategory');
+    this.headerFooterDropDown = $('#selectHeaderF');
+    this.mailPurposeDropDown = $('#selectPurpose');
+    this.expirationDate = element(by.model('selectedDate'));
+    this.engSummary = $('#engSumId');
+    this.initSystems = element(by.model('selectedSystems'));
+    this.addBrandBtn = element(by.buttonText('Add Brand'));
+    this.saveBtn = element(by.buttonText('Save'));
+    this.cancelBtn = element(by.buttonText('Cancel'));
+
+    this.brandToggles = $$('.accordion-toggle > span');
+
+    this.get = function(templateId) {
+       [..]
+    };
+
+    /** 
+    *  get templates per brand collection
+    *  @returns {ElementFinder|*} collection of templates per brands 
+    */
+    this.getTemplatesPerBrands = function() {
+        return element.all(by.repeater('tpd in templatesPerBrand'));
+    };
+
+module.exports = new MailSettingsPage();
 </code></pre>
-					<strong>Your Test file</strong>
-<pre><code>var AngularHomepage = require('./homepage.po.js');
-describe('HomePage Tests', function() {
-   var angularHomepage = new AngularHomepage();
-   angularHomepage.nameInput.sendKeys('Rafael');
-   //...
-});
+
+<strong>Your Test file</strong>
+<pre><code>
+	
+var pageObj = require('./MailSettingsPage');
+var collectionElems = require('../test-utils/element-collections-utils');
+var Q = require('q');
+
+var INIT_SYSTEMS = ['Account Manager', 'Account Properties', 'AP Admin'];
+var LANGS = ['Albanian', 'Arabic', 'Bulgarian'];
+
+describe('mail settings templates tests', function () {
+	beforeEach(function () {
+	pageObj.get();
+	});
+
+	describe("empty template tests", function() {
+	
+	it('should have empty name', function() {
+	    expect(pageObj.name.getAttribute('value')).toBeFalsy(); //empty string actually, which is a falsy value
+	});
 </code></pre>
 				</section>
 
