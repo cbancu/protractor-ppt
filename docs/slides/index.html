@@ -180,12 +180,14 @@ describe('angularjs homepage', function() {
 					<pre class="mb-30"><code>element( by.binding('appName') );</code></pre>
 					<p>Collection of elements</p>
 					<pre><code>// clicks the 3rd element
-element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
+element.all( by.css('[ng-click="openPage()"]') ).get(2).click();
 // HINT
 
 // when selecting by css, some shorcuts are available 
 // the above is equivalent to 
 $$('[ng-click="openPage()"]').get(2).click();
+</code></pre>
+
 				</section>
 
 				<section>
