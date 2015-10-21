@@ -434,18 +434,46 @@ it('should delete the newly created template', function () {
 
 				<section>
 					<h2 class="slide-header">Page Objects</h2>
-					<pre><code data-trim>var AngularHomepage = function() {
-  this.nameInput = element(by.model('yourName'));
-  this.greeting = element(by.binding('yourName'));
+<pre><code data-trim>
 
-  this.get = function() {
-    browser.get('http://www.angularjs.org');
-  };
+var colUtils = require('../test-utils/element-collections-utils');
 
-  this.setName = function(name) {
-    this.nameInput.sendKeys(name);
-  };
-};</code></pre>
+var SearchTemplatesPage = function() {
+    var GRID_ID = "tmplGridId";
+    this.id = element(by.model('selectedId')); 
+    this.content = element(by.model('selectedContent'));
+    this.categoriesComboBox = element(by.model('selectedCategories'));
+
+    this.searchBtn = $('[ng-click="onSearch()"]');
+    this.clearBtn = $('[ng-click="onCancel()"]');
+
+    this.get = function () {
+        var url = 'https://localhost/MailerAdmin/#/gallery/search/search/search-results?shouldLoadData=false&isSearch=false';
+        browser.get(url);
+    };
+
+    this.getGridId = function () {
+        return GRID_ID;
+    };
+
+    this.searchBy = function(id, content, categories) {
+        this.clearBtn.click(); // research search criteria 
+        if (id != null && !isNaN(id)) {
+            this.id.clear();
+            this.id.sendKeys(id);
+        }
+        if (content != null) {
+            this.content.clear();
+            this.content.sendKeys(content);
+        }
+        if (categories != null && categories.length > 0) {
+            colUtils.selectComboBoxValues(this.categoriesComboBox, categories);
+        }
+        this.searchBtn.click();
+    };
+};
+module.exports = new SearchTemplatesPage();
+</code></pre>
 				</section>
 
 				<section>
