@@ -499,20 +499,33 @@ describe('HomePage Tests', function() {
 
 				<section>
 					<h2 class="slide-header">Separate your tests in various test suites</h2>
-<pre><code data-trim>exports.config = {
-  seleniumAddress: 'http://localhost:4444/wd/hub',
-  capabilities: { 'browserName': 'chrome' },
+<pre><code data-trim>
+exports.config = {
+    // The address of a running selenium server.
+    seleniumAddress: 'http://localhost:4444/wd/hub',
 
-  suites: {
-    homepage: 'tests/e2e/homepage/**/*Spec.js',
-    search: ['tests/e2e/contact_search/**/*Spec.js']
-  },
+    // Spec patterns are relative to the location of the spec file. They may
+    // include glob patterns.
+    suites: {
+        toolbar: 'e2e/toolbar/**/*Spec.js',
+        mail_settings: 'e2e/mail-settings/**/*Spec.js',
+        recent_templates: 'e2e/recent-templates/**/*Spec.js',
+        cross_page : 'e2e/cross-page/**/Spec.js'
+    },
 
-  jasmineNodeOpts: { showColors: true }
-};
+    capabilities: {
+        'browserName': 'chrome'
+    },
+
+    // Options to be passed to Jasmine-node.
+    jasmineNodeOpts: {
+        showColors: true, // Use colors in the command line report.
+        isVerbose: false,
+        //includeStackTrace: true
+    }
 </code></pre>
 					<strong>Running specific suite of tests</strong>
-					<pre><code>protractor protractor.conf.js --suite homepage
+					<pre><code>protractor protractor.conf.js --suite cross_page
 					</code></pre>
 				</section>
 
