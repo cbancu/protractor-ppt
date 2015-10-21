@@ -330,15 +330,32 @@ element.all(by.repeater('user in users').row(2)); // -or- return all rows/column
 				</section>
 
 				<section>
-					<h2>Promises based</h2>
+					<h2>Promises based(1)</h2>
 					<p>All Protractor methods are asynchronous and return <a href="https://www.promisejs.org/">promises</a>.</p>
 <pre><code style="font-size:1.2em;line-height:150%">// Example of getText() promise
-element( by.model('zipcode') ).getText()
-  .then(function(val) {
-    var num = val.substring(0, 4);
-    var isNum = !isNaN(num);
-    expect( isNum ).toBeTruthy();
-  });
+this.getTemplatesCountDisplayed = function() {
+	// e.g. '54 templates found'
+	return self.getRecentTemplatesCountElement().getText()
+	    .then(function(value) {
+	        return parseInt(value.split(" ")[0]);
+	    });
+	};
+</code></pre>
+				</section>
+				
+<section>
+					<h2>Promises with element chaining</h2>
+					
+<pre><code style="font-size:1.2em;line-height:150%">
+this.getGridColumnsNumber = function() {
+        return gridTestUtils.getGrid(GRID_ID)
+            .element(by.css('.ui-grid-render-container-body'))
+            .element(by.css('.ui-grid-header-cell-wrapper'))
+            .all(by.repeater('col in colContainer.renderedColumns'))
+            .then(function(cols) {
+                return cols.length;
+            });
+    };
 </code></pre>
 				</section>
 
