@@ -179,14 +179,14 @@ describe('angularjs homepage', function() {
 					<p>Single element</p>
 					<pre class="mb-30">
 					<code>
-					element(by.binding('appName') );
-					element(by.css('.mail-setting-div'));
+element(by.binding('appName') );
+element(by.css('.mail-setting-div'));
 					
-					// HINT
-					// when selecting a single element by css, a shortcut is available
-					// the above statement is equivalent to 
-					$('.mail-setting-div')
-					</code></pre>
+// HINT
+// when selecting a single element by css, a shortcut is available
+// the above statement is equivalent to 
+$('.mail-setting-div')
+</code></pre>
 					<p>Collection of elements</p>
 					<pre><code>// clicks the 3rd element
 element.all( by.css('[ng-click="openPage()"]') ).get(2).click();
